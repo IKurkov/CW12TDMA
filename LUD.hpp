@@ -48,6 +48,7 @@ Vector<T> LUSolve( const Matrix<T> &L, const Matrix<T> &U, const Vector<T> &b, s
   size_t n = L.rows();
   Vector<T> x(n);
 
+  opers = 0;
   /* Solve Ly = b */
   for (size_t i = 0; i < n; i++)
   {
@@ -139,6 +140,7 @@ T GaussElimination( Matrix<T> A, const Vector<T> &b, Vector<T> &x, size_t &opers
     rows[i] = A[i];
   x = b;
 
+  opers = 0;
   /* Forward move */
   for (size_t i = 0; i < n; i++)
   {

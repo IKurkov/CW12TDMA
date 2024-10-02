@@ -51,6 +51,7 @@ Vector<T> CholSolve( const Matrix<T> &L, const Vector<T> &b, size_t &opers )
   size_t n = L.rows();
   Vector<T> x(n);
 
+  opers = 0;
   /* Solve Ly = b */
   for (size_t i = 0; i < n; i++)
   {

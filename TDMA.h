@@ -10,7 +10,7 @@
  * @param b vector of right sides of system
  * @param x solution of system
  * @return true - A is diagonal dominant, false - A isn't diagonal dominant */
-bool ThreeDiagMatrixAlg( const Matrix<double> &A, const Vector<double> b, Vector<double> &x );
+bool ThreeDiagMatrixAlg( const Matrix<double> &A, const Vector<double> b, Vector<double> &x, size_t &opers );
 
 /* Check if given matrix is diagonal dominant
 * @param A threediagonal matrix
