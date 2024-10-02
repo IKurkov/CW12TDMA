@@ -9,6 +9,7 @@
  * @param A threediagonal matrix
  * @param b vector of right sides of system
  * @param x solution of system
+ * @param ops number of performed operations
  * @return true - A is diagonal dominant, false - A isn't diagonal dominant */
 bool ThreeDiagMatrixAlg( const Matrix<double> &A, const Vector<double> b, Vector<double> &x, size_t &opers );
 

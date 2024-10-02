@@ -3,7 +3,6 @@
 #include <cstdlib>
 #include <iostream>
 
-#include "chol.hpp"
 #include "fort.hpp"
 #include "lud.hpp"
 #include "matrix.hpp"
@@ -30,17 +29,53 @@ Matrix<double> GenThreeDiag( size_t n )
 
 int main( void )
 {
-  Matrix<double> A = GenThreeDiag(3);
-  Vector<double> b(3), x;
+  bool run = true;
 
-  b[1] = 2;
-  std::cout << A << '\n';
-  if (ThreeDiagMatrixAlg(A, b, x))
+  while (run)
   {
-    std::cout << "Ok\n" << NormInf(A * x - b);
-  }
-  else
-    std::cout << "Bad arguments\n";
+    std::cout << "=====Threediagonal matrix algorithm menu=====\n"
+      << "0 - exit\n"
+      << "1 - threediagonal matrix algorithm\n";
+    switch (_getch())
+    {
+    case '0':
+      run = false;
+      break;
+    case '1':
+    {
+      size_t n, ops;
+      Matrix<double> A, L, U, P;
+      Vector<double> b, x, x_ref;
+      fort::char_table compare;
 
+      std::cout << "Input size of matrix: ";
+      std::cin >> n;
+      A = GenThreeDiag(n);
+      std::cout << "A = " << A << "\n";
+
+      x_ref = Vector<double>(n);
+      for (size_t i = 0; i < n; i++)
+        x_ref[i] = 1;
+      std::cout << "Referens solution: " << x_ref << "\n";
+      b = A * x_ref;
+
+      compare << fort::header << "Method" << "x" << "|x - x_ref|_inf" << "Number of operations" << fort::endr;
+
+      GaussElimination(A, b, x, ops);
+      compare << "Gauss" << x << NormInf(x - x_ref) << ops << fort::endr;
+
+      LUPDecomp(A, L, U, P);
+      LUPSolve(L, U, P, b, ops);
+      compare << "LUP" << x << NormInf(x - x_ref) << ops << fort::endr;
+
+      ThreeDiagMatrixAlg(A, b, x, ops);
+      compare << "Threediagonal" << x << NormInf(x - x_ref) << ops << fort::endr;
+      std::cout << compare.to_string();
+      break;
+    }
+    default:
+      std::cout << "[Error]: Incorrect choice!\n";
+    }
+  }
   return 0;
 }

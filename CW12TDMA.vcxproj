@@ -133,7 +133,6 @@
     <ClCompile Include="TDMA.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CHOL.hpp" />
     <ClInclude Include="fort.hpp" />
     <ClInclude Include="LUD.hpp" />
     <ClInclude Include="matrix.hpp" />
