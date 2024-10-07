@@ -14,7 +14,7 @@ Matrix<double> GenThreeDiag( size_t n )
 {
   Matrix<double> A(n, n);
 
-  A[0][0] = A[0][1] = (10.0 * rand() / RAND_MAX + 10.0) * (rand() & 1 ? 1.0 : -1.0);
+  A[0][0] = (10.0 * rand() / RAND_MAX + 10.0) * (rand() & 1 ? 1.0 : -1.0);
   A[0][1] = 10.0 * rand() / RAND_MAX - 5;
   for (size_t i = 1; i + 1 < n; i++)
   {
